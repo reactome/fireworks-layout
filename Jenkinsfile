@@ -48,7 +48,7 @@ pipeline{
 	                                    sh """\
 				docker run -v \$(pwd)/${env.OUTPUT_FOLDER}:${CONT_ROOT}/${env.OUTPUT_FOLDER} --net=host --name ${CONT_NAME} ${ECR_URL}:latest /bin/bash -c 'java -Dlogback.configurationFile=src/main/resources/logback.xml -jar target/fireworks-exec.jar --user $user --password $pass --folder ./config --output ./${env.OUTPUT_FOLDER}'
                                             """
-					    sh "sudo chown jenkins:jenkins ${env.OUTPUT_FOLDER}"
+					    sh "sudo chown jenkins:jenkins ${env.OUTPUT_FOLDER} -R"
 					    // Create archive that will be stored on S3.
 					    sh "tar -zcf fireworks-v${releaseVersion}.tgz ${env.OUTPUT_FOLDER}/"
 					}
