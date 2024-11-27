@@ -11,6 +11,9 @@ pipeline{
 	// Set output folder that will contain files created by step.
 	environment {
         	OUTPUT_FOLDER = "fireworks"
+		ECR_URL = 'public.ecr.aws/reactome/fireworks-layout'
+		CONT_NAME = 'fireworks_layout_container'
+		CONT_ROOT = '/opt/fireworks_layout'
     	}
 
 	stages{
@@ -22,24 +25,32 @@ pipeline{
 				}
 			}
 		}
-		// This stage builds the jar file using maven.
-		stage('Setup: Build jar file'){
+
+                stage('Setup: Pull and clean docker environment'){
 			steps{
-				script{
-					sh "mvn clean package"
-				}
+				sh "docker pull ${ECR_URL}:latest"
+				sh """
+					if docker ps -a --format '{{.Names}}' | grep -Eq '${CONT_NAME}'; then
+						docker rm -f ${CONT_NAME}
+					fi
+				"""
 			}
 		}
+		
 		// Execute the jar file, producing the diagram JSON files.
 		stage('Main: Run Fireworks-Layout'){
 			steps{
 				script{
 					def releaseVersion = utils.getReleaseVersion()
 					sh "mkdir -p ${env.OUTPUT_FOLDER}"
+					sh "sudo rm -rf ${env.OUTPUT_FOLDER}/*"
 					withCredentials([usernamePassword(credentialsId: 'neo4jUsernamePassword', passwordVariable: 'pass', usernameVariable: 'user')]){
-	                    sh "java -Dlogback.configurationFile=src/main/resources/logback.xml -jar target/fireworks-exec.jar --user $user --password $pass --folder ./config --output ./${env.OUTPUT_FOLDER}"
-						// Create archive that will be stored on S3.
-						sh "tar -zcf fireworks-v${releaseVersion}.tgz ${env.OUTPUT_FOLDER}/"
+	                                    sh """\
+				docker run -v \$(pwd)/${env.OUTPUT_FOLDER}:${CONT_ROOT}/${env.OUTPUT_FOLDER} --net=host --name ${CONT_NAME} ${ECR_URL}:latest /bin/bash -c 'java -Dlogback.configurationFile=src/main/resources/logback.xml -jar target/fireworks-exec.jar --user $user --password $pass --folder ./config --output ./${env.OUTPUT_FOLDER}'
+                                            """
+					    sh "sudo chown jenkins:jenkins ${env.OUTPUT_FOLDER}"
+					    // Create archive that will be stored on S3.
+					    sh "tar -zcf fireworks-v${releaseVersion}.tgz ${env.OUTPUT_FOLDER}/"
 					}
 				}
 			}
