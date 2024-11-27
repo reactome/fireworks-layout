@@ -13,7 +13,7 @@ pipeline{
         	OUTPUT_FOLDER = "fireworks"
 		ECR_URL = 'public.ecr.aws/reactome/fireworks-layout'
 		CONT_NAME = 'fireworks_layout_container'
-		CONT_ROOT = '/opt/fireworks_layout'
+		CONT_ROOT = '/opt/fireworks-layout'
     	}
 
 	stages{
