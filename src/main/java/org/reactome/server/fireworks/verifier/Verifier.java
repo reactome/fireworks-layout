@@ -37,7 +37,7 @@ public class Verifier {
     }
 
     public void run() {
-        List<String> errorMessages = getErrorMessages();
+        List<String> errorMessages = verifyFireworksLayoutRanCorrectly();
         if (errorMessages.isEmpty()) {
             System.out.println("Fireworks Layout has run correctly!");
         } else {
@@ -46,7 +46,7 @@ public class Verifier {
         }
     }
 
-    private List<String> getErrorMessages() {
+    private List<String> verifyFireworksLayoutRanCorrectly() {
         List<String> errorMessages = new ArrayList<>();
 
         errorMessages.addAll(checkFireworksFolderExists());
