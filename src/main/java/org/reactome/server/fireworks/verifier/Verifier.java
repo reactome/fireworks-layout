@@ -3,7 +3,10 @@ package org.reactome.server.fireworks.verifier;
 import com.martiansoftware.jsap.*;
 import org.reactome.server.fireworks.Main;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -57,7 +60,9 @@ public class Verifier {
     }
 
     private List<String> checkFireworksFolderExists() {
-        return new ArrayList<>();
+        return !Files.exists(Paths.get(this.outputDirectory)) ?
+            Arrays.asList(this.outputDirectory + " does not exist; Expected fireworks output files at this location") :
+            new ArrayList<>();
     }
 
     private List<String> checkJSONFilesForAllSpeciesExist() {
