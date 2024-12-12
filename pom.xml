@@ -147,6 +147,54 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<!-- Generate jar with dependencies -->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.6</version>
+
+				<executions>
+					<execution>
+						<id>main</id>
+						<configuration>
+							<archive>
+								<manifest>
+									<Multi-Release>true</Multi-Release>
+									<Main-Class>org.reactome.server.fireworks.Main</Main-Class>
+								</manifest>
+							</archive>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+							<finalName>fireworks</finalName>
+						</configuration>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+
+					<execution>
+						<id>verifier</id>
+						<configuration>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+							<archive>
+								<manifestEntries>
+									<Main-Class>org.reactome.server.fireworks.verifier.Verifier</Main-Class>
+									<Multi-Release>true</Multi-Release>
+								</manifestEntries>
+							</archive>
+							<finalName>fireworks-verifier</finalName>
+						</configuration>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
@@ -200,5 +248,4 @@
 			</snapshots>
 		</repository>
 	</repositories>
-
 </project>
