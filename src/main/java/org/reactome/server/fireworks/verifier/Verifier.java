@@ -4,10 +4,12 @@ import com.martiansoftware.jsap.*;
 import org.reactome.server.fireworks.Main;
 
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Joel Weiser (joel.weiser@oicr.on.ca)
@@ -66,10 +68,29 @@ public class Verifier {
     }
 
     private List<String> checkJSONFilesForAllSpeciesExist() {
-        return new ArrayList<>();
+        List<String> errorMessages = new ArrayList<>();
+
+        List<String> jsonFileNames = getJSONFileNamesForAllSpecies();
+        for (String jsonFileName : jsonFileNames) {
+            Path jsonFilePath = Paths.get(this.outputDirectory, jsonFileName);
+            if (!Files.exists(jsonFilePath)) {
+                errorMessages.add("File " + jsonFilePath + " does not exist");
+            }
+        }
+
+        return errorMessages;
     }
 
     private List<String> checkJSONFileSizesComparedToPreviousRelease() {
         return new ArrayList<>();
+    }
+
+    private List<String> getJSONFileNamesForAllSpecies() {
+        List<String> species = Arrays.asList("Bos_taurus","Caenorhabditis_elegans", "Canis_familiaris", "Danio_rerio",
+            "Dictyostelium_discoideum","Drosophila_melanogaster", "Gallus_gallus", "Homo_sapiens", "Mus_musculus",
+            "Mycobacterium_tuberculosis", "Plasmodium_falciparum", "Rattus_norvegicus", "Saccharomyces_cerevisiae",
+            "Schizosaccharomyces_pombe", "Sus_scrofa", "Xenopus_tropicalis");
+
+        return species.stream().map(sp -> sp.concat(".json")).collect(Collectors.toList());
     }
 }
