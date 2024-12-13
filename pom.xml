@@ -241,6 +241,7 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+
 		<!-- EBI SNAPSHOT repo -->
 		<repository>
 			<id>nexus-ebi-snapshot-repo</id>
@@ -251,6 +252,13 @@
 			</releases>
 			<snapshots>
 			</snapshots>
+		</repository>
+
+		<!-- Sonatype SNAPSHOT repo -->
+		<repository>
+			<id>ossrh</id>
+			<name>Sonatype Snapshots</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</repository>
 	</repositories>
 </project>
