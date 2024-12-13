@@ -108,7 +108,12 @@ public class Verifier {
                     errorMessages.add(jsonFilePath + " has too small size " +
                         "(actual: " + actualSizeInBytes + " bytes) " +
                         "(expected: " + expectedSizeInBytes + " bytes) - " +
-                        "difference of " + (expectedSizeInBytes - actualSizeInBytes) + " bytes");
+                        "difference of " + (actualSizeInBytes - expectedSizeInBytes) + " bytes");
+                } else {
+                    System.out.println(jsonFilePath + " has correct size " +
+                        "(actual: " + actualSizeInBytes + " bytes) " +
+                        "(expected: " + expectedSizeInBytes + " bytes) - " +
+                        "difference of " + (actualSizeInBytes - expectedSizeInBytes) + " bytes");
                 }
             }
         }
