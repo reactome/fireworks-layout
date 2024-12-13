@@ -60,8 +60,10 @@ public class Verifier {
         List<String> errorMessages = new ArrayList<>();
 
         errorMessages.addAll(checkFireworksFolderExists());
-        errorMessages.addAll(checkJSONFilesForAllSpeciesExist());
-        errorMessages.addAll(checkJSONFileSizesComparedToPreviousRelease());
+        if (errorMessages.isEmpty()) {
+            errorMessages.addAll(checkJSONFilesForAllSpeciesExist());
+            errorMessages.addAll(checkJSONFileSizesComparedToPreviousRelease());
+        }
 
         return errorMessages;
     }
