@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author Antonio Fabregat <fabregat@ebi.ac.uk>
+ * @author Antonio Fabregat (fabregat@ebi.ac.uk)
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
@@ -50,7 +50,7 @@ public class Bursts {
     }
 
     /**
-     * @param burstList The burstList
+     * @param bursts The burstList
      */
     @JsonProperty("bursts")
     public void setBurstList(Map<Long, Burst> bursts) {

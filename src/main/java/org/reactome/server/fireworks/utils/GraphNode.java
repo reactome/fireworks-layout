@@ -11,7 +11,7 @@ import org.reactome.server.graph.utils.ReactomeGraphCore;
 import java.util.*;
 
 /**
- * @author Antonio Fabregat <fabregat@ebi.ac.uk>
+ * @author Antonio Fabregat (fabregat@ebi.ac.uk)
  */
 public class GraphNode implements Comparable<GraphNode> {
 

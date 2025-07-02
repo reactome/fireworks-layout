@@ -4,7 +4,7 @@ import org.apache.commons.math3.util.Precision;
 import org.reactome.server.fireworks.utils.GraphNode;
 
 /**
- * @author Antonio Fabregat <fabregat@ebi.ac.uk>
+ * @author Antonio Fabregat (fabregat@ebi.ac.uk)
  */
 @SuppressWarnings("unused")
 public class Node {

@@ -3,7 +3,7 @@ package org.reactome.server.fireworks.layout;
 import org.reactome.server.fireworks.utils.GraphNode;
 
 /**
- * @author Antonio Fabregat <fabregat@ebi.ac.uk>
+ * @author Antonio Fabregat (fabregat@ebi.ac.uk)
  */
 public class FireworksLayout {
 

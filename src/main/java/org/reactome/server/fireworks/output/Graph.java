@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 /**
- * @author Antonio Fabregat <fabregat@ebi.ac.uk>
+ * @author Antonio Fabregat (fabregat@ebi.ac.uk)
  */
 @SuppressWarnings("unused")
 public class Graph {

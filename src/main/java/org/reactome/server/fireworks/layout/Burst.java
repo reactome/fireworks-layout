@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import javax.annotation.Generated;
 
 /**
- * @author Antonio Fabregat <fabregat@ebi.ac.uk>
+ * @author Antonio Fabregat (fabregat@ebi.ac.uk)
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")

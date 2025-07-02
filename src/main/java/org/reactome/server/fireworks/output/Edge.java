@@ -1,7 +1,7 @@
 package org.reactome.server.fireworks.output;
 
 /**
- * @author Antonio Fabregat <fabregat@ebi.ac.uk>
+ * @author Antonio Fabregat (fabregat@ebi.ac.uk)
  */
 @SuppressWarnings("unused")
 public class Edge {

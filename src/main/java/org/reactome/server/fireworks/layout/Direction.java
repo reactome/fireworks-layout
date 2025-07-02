@@ -1,7 +1,7 @@
 package org.reactome.server.fireworks.layout;
 
 /**
- * @author Antonio Fabregat <fabregat@ebi.ac.uk>
+ * @author Antonio Fabregat (fabregat@ebi.ac.uk)
  */
 enum Direction {
 
