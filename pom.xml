@@ -1,318 +1,324 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
- <modelVersion>4.0.0</modelVersion>
 
- <parent>
-    <groupId>org.reactome.maven</groupId>
-    <artifactId>reactome-parent</artifactId>
-    <version>1.0.5</version>
-  </parent>
+    <!-- Generate the jar only -->
+    <modelVersion>4.0.0</modelVersion>
 
- <groupId>org.reactome.server</groupId>
- <artifactId>fireworks-layout</artifactId>
- <version>3.1.0</version>
- <packaging>jar</packaging>
+    <parent>
+        <groupId>org.reactome.maven</groupId>
+        <artifactId>reactome-parent</artifactId>
+        <version>1.0.5</version>
+    </parent>
 
- <name>Fireworks Layout</name>
- <description>A hierarchical visualisation of Reactome pathways in a space-filling graph</description>
- <url>https://github.com/reactome/fireworks-layout</url>
- <organization>
-    <name>Reactome</name>
-    <url>https://reactome.org/</url>
-  </organization>
- <licenses>
-    <license>
-      <name>The Apache License, Version 2.0</name>
-      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-    </license>
-  </licenses>
+    <groupId>org.reactome.server</groupId>
+    <artifactId>fireworks-layout</artifactId>
+    <version>3.1.0</version>
+    <packaging>jar</packaging>
 
- <developers>
-    <developer>
-      <id>gviteri</id>
-      <name>Guilherme Viteri</name>
-      <roles>
-        <role>alumni</role>
-      </roles>
-      <organization>European Bioinformatics Institute</organization>
-      <organizationUrl>https://www.ebi.ac.uk/</organizationUrl>
-    </developer>
-    <developer>
-      <id>amundo</id>
-      <name>Antonio Fabregat</name>
-      <roles>
-        <role>alumni</role>
-      </roles>
-      <organization>European Bioinformatics Institute</organization>
-      <organizationUrl>https://www.ebi.ac.uk/</organizationUrl>
-    </developer>
-  </developers>
+    <name>Fireworks Layout</name>
+    <description>A hierarchical visualisation of Reactome pathways in a space-filling graph</description>
+    <url>https://github.com/reactome/fireworks-layout</url>
+    <organization>
+        <name>Reactome</name>
+        <url>https://reactome.org/</url>
+    </organization>
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
 
- <scm>
-    <connection>scm:git:git://github.com/reactome/fireworks-layout.git</connection>
-    <developerConnection>scm:git:ssh://github.com:reactome/fireworks-layout.git</developerConnection>
-    <url>https://github.com/reactome/fireworks-layout/tree/master</url>
-  </scm>
- <!-- Configures the distribution to nexus repository -->
- <distributionManagement>
-		<!-- Sonatype Release repo -->
-		<repository>
-			<id>ossrh</id>
-			<name>Sonatype Release Repository</name>
-			<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2</url>
-		</repository>
+    <developers>
+        <developer>
+            <id>gviteri</id>
+            <name>Guilherme Viteri</name>
+            <roles>
+                <role>alumni</role>
+            </roles>
+            <organization>European Bioinformatics Institute</organization>
+            <organizationUrl>https://www.ebi.ac.uk/</organizationUrl>
+        </developer>
+        <developer>
+            <id>amundo</id>
+            <name>Antonio Fabregat</name>
+            <roles>
+                <role>alumni</role>
+            </roles>
+            <organization>European Bioinformatics Institute</organization>
+            <organizationUrl>https://www.ebi.ac.uk/</organizationUrl>
+        </developer>
+    </developers>
 
-		<!-- Sonatype SNAPSHOT repo -->
-		<snapshotRepository>
-			<id>ossrh</id>
-			<name>Sonatype Snapshot Repository</name>
-			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
+    <scm>
+        <connection>scm:git:git://github.com/reactome/fireworks-layout.git</connection>
+        <developerConnection>scm:git:ssh://github.com:reactome/fireworks-layout.git</developerConnection>
+        <url>https://github.com/reactome/fireworks-layout/tree/master</url>
+    </scm>
 
- <properties>
+    <!-- Configures the distribution to nexus repository -->
+    <distributionManagement>
+        <!-- Sonatype Release repo -->
+        <repository>
+            <id>ossrh</id>
+            <name>Sonatype Release Repository</name>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
 
-    <main.class>org.reactome.server.fireworks.Main</main.class>
+        <!-- Sonatype SNAPSHOT repo -->
+        <snapshotRepository>
+            <id>ossrh</id>
+            <name>Sonatype Snapshot Repository</name>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
-    <maven.gpg.version>1.5</maven.gpg.version>
-    <maven.jar.version>2.6</maven.jar.version>
-    <maven.javadoc.version>2.10.3</maven.javadoc.version>
-    <maven.release.version>2.5.3</maven.release.version>
-    <maven.resources.version>3.0.1</maven.resources.version>
-    <nexus-staging-maven-plugin>1.6.7</nexus-staging-maven-plugin>
-  </properties>
+    <properties>
+        <main.class>org.reactome.server.fireworks.Main</main.class>
 
- <repositories>
-    <!-- EBI repo -->
-    <repository>
-      <id>nexus-ebi-repo</id>
-      <name>The EBI internal repository</name>
-      <url>https://www.ebi.ac.uk/Tools/maven/repos/content/groups/ebi-repo/</url>
-      <releases>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <!-- EBI SNAPSHOT repo -->
-    <repository>
-      <id>nexus-ebi-snapshot-repo</id>
-      <name>The EBI internal snapshot repository</name>
-      <url>https://www.ebi.ac.uk/Tools/maven/repos/content/groups/ebi-snapshots/</url>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <snapshots>
-      </snapshots>
-    </repository>
-	</repositories>
+        <maven.gpg.version>1.5</maven.gpg.version>
+        <maven.jar.version>2.6</maven.jar.version>
+        <maven.javadoc.version>2.10.3</maven.javadoc.version>
+        <maven.release.version>2.5.3</maven.release.version>
+        <maven.resources.version>3.0.1</maven.resources.version>
+        <nexus-staging-maven-plugin>1.6.7</nexus-staging-maven-plugin>
+    </properties>
 
- <dependencies>
-    <!--Reactome data-->
-    <dependency>
-      <groupId>org.reactome.server.graph</groupId>
-      <artifactId>graph-core</artifactId>
-    </dependency>
-    <!--JSAP console reader-->
-    <dependency>
-      <groupId>com.martiansoftware</groupId>
-      <artifactId>jsap</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-math3</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-    </dependency>
-    <!-- Logging -->
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-    </dependency>
-  </dependencies>
+    <repositories>
+        <!-- EBI repo -->
+        <repository>
+            <id>nexus-ebi-repo</id>
+            <name>The EBI internal repository</name>
+            <url>https://www.ebi.ac.uk/Tools/maven/repos/content/groups/ebi-repo/</url>
+            <releases>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
 
- <build>
-    <finalName>fireworks</finalName>
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-        <filtering>true</filtering>
-      </resource>
-    </resources>
-    <testResources>
-      <testResource>
-        <directory>src/test/resources</directory>
-        <filtering>true</filtering>
-      </testResource>
-    </testResources>
-    <plugins>
-      <!-- To be able to run this project in the command line e.g java -jar -->
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>${spring-boot.version}</version>
-        <configuration>
-          <attach>false</attach>
-          <fork>true</fork>
-          <mainClass>${main.class}</mainClass>
-          <classifier>exec</classifier>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>repackage</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-resources-plugin</artifactId>
-        <version>${maven-resources-plugin.version}</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>${maven.compiler.version}</version>
-        <configuration>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
-        </configuration>
-      </plugin>
-      <!-- Generate the jar only -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>${maven.jar.version}</version>
-        <executions>
-          <execution>
-            <id>default-jar</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-            <configuration>
-              <excludes>
-                <exclude>**/logback.xml</exclude>
-              </excludes>
-            </configuration>
-          </execution>
-          <execution>
-            <id>exec-jar</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-            <configuration>
-              <classifier>exec</classifier>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.1.1</version>
-        <dependencies>
-          <!-- This dependency allows Checkstyle to understand Java 11 syntax -->
-          <dependency>
-            <groupId>com.puppycrawl.tools</groupId>
-            <artifactId>checkstyle</artifactId>
-            <version>8.44</version>
-          </dependency>
-        </dependencies>
-        <executions>
-          <execution>
-            <id>checkstyle-check</id>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <configLocation>checkstyle.xml</configLocation>
-          <!-- Optional: Set encoding -->
-          <encoding>UTF-8</encoding>
-        </configuration>
-      </plugin>
+        <!-- EBI SNAPSHOT repo -->
+        <repository>
+            <id>nexus-ebi-snapshot-repo</id>
+            <name>The EBI internal snapshot repository</name>
+            <url>https://www.ebi.ac.uk/Tools/maven/repos/content/groups/ebi-snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+            </snapshots>
+        </repository>
+    </repositories>
 
-      <!-- Nexus staging plugin for Sonatype deployment -->
-      <plugin>
-        <groupId>org.sonatype.plugins</groupId>
-        <artifactId>nexus-staging-maven-plugin</artifactId>
-        <version>${nexus-staging-maven-plugin}</version>
-        <extensions>true</extensions>
-        <configuration>
-          <serverId>ossrh</serverId>
-          <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
-          <autoReleaseAfterClose>true</autoReleaseAfterClose>
-        </configuration>
-      </plugin>
+    <dependencies>
+        <!--Reactome data-->
+        <dependency>
+            <groupId>org.reactome.server.graph</groupId>
+            <artifactId>graph-core</artifactId>
+        </dependency>
 
-      <!-- Generate source jar file -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <version>${maven.source.version}</version>
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+        <!--JSAP console reader-->
+        <dependency>
+            <groupId>com.martiansoftware</groupId>
+            <artifactId>jsap</artifactId>
+        </dependency>
 
-      <!-- Generate JavaDoc jar file -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>${maven.javadoc.version}</version>
-        <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+        </dependency>
 
-      <!-- Signs deployed jar, source jar, and JavaDoc jar with GPG -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-gpg-plugin</artifactId>
-        <version>${maven.gpg.version}</version>
-        <executions>
-          <execution>
-            <id>sign-artifacts</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>sign</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
 
-      <!-- Allows "release" mvn goal to deploy a SNAPSHOT or version release to Sonatype -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>${maven.release.version}</version>
-        <configuration>
-          <autoVersionSubmodules>true</autoVersionSubmodules>
-          <useReleaseProfile>false</useReleaseProfile>
-          <releaseProfiles>release</releaseProfiles>
-          <goals>deploy</goals>
-        </configuration>
-      </plugin>
+        <!-- Logging -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+    </dependencies>
 
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>tidy-maven-plugin</artifactId>
-        <version>1.0-beta-1</version>
-      </plugin>
-    </plugins>
-  </build>
+    <build>
+        <finalName>fireworks</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+        <plugins>
+            <!-- To be able to run this project in the command line e.g java -jar -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <configuration>
+                    <attach>false</attach>
+                    <fork>true</fork>
+                    <mainClass>${main.class}</mainClass>
+                    <classifier>exec</classifier>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven.jar.version}</version>
+                <executions>
+                    <execution>
+                        <id>default-jar</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/logback.xml</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>exec-jar</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>exec</classifier>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.1.1</version>
+                <dependencies>
+                    <!-- This dependency allows Checkstyle to understand Java 11 syntax -->
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>8.44</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>checkstyle-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <configLocation>checkstyle.xml</configLocation>
+                    <!-- Optional: Set encoding -->
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <!-- Nexus staging plugin for Sonatype deployment -->
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>${nexus-staging-maven-plugin}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+
+            <!-- Generate source jar file -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven.source.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Generate JavaDoc jar file -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven.javadoc.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Signs deployed jar, source jar, and JavaDoc jar with GPG -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>${maven.gpg.version}</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Allows "release" mvn goal to deploy a SNAPSHOT or version release to Sonatype -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>${maven.release.version}</version>
+                <configuration>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <useReleaseProfile>false</useReleaseProfile>
+                    <releaseProfiles>release</releaseProfiles>
+                    <goals>deploy</goals>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>tidy-maven-plugin</artifactId>
+                <version>1.0-beta-1</version>
+            </plugin>
+        </plugins>
+    </build>
 </project>
