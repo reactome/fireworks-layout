@@ -55,7 +55,6 @@
         <developerConnection>scm:git:ssh://github.com:reactome/fireworks-layout.git</developerConnection>
         <url>https://github.com/reactome/fireworks-layout/tree/master</url>
     </scm>
-
     <!-- Configures the distribution to nexus repository -->
     <distributionManagement>
         <!-- Sonatype Release repo -->
