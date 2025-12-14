@@ -32,11 +32,13 @@ FROM eclipse-temurin:11-jre-focal
 
 ARG REPO_DIR
 
-ARG JAR_FILE=target/fireworks-exec.jar
+ARG EXEC_JAR_FILE=target/fireworks-exec.jar
+ARG VERIFIER_JAR_FILE=target/fireworks-verifier.jar
 
 WORKDIR ${REPO_DIR}
 
-COPY --from=build-jar ${REPO_DIR}/${JAR_FILE} ./target/
+COPY --from=build-jar ${REPO_DIR}/${EXEC_JAR_FILE} ./target/
+COPY --from=build-jar ${REPO_DIR}/${VERIFIER_JAR_FILE} ./target/
 
 COPY --from=build-jar ${REPO_DIR}/config/ ./config/
 
