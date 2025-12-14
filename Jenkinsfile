@@ -47,12 +47,39 @@ pipeline{
 					sh "sudo rm -rf ${env.OUTPUT_FOLDER}/*"
 					withCredentials([usernamePassword(credentialsId: 'neo4jUsernamePassword', passwordVariable: 'pass', usernameVariable: 'user')]){
 						sh """\
-							docker run -v \$(pwd)/${env.OUTPUT_FOLDER}:${CONT_ROOT}/${env.OUTPUT_FOLDER} --net=host --name ${CONT_NAME} ${ECR_URL}:latest /bin/bash -c 'java -Dlogback.configurationFile=src/main/resources/logback.xml -jar target/fireworks-exec.jar --user $user --password $pass --folder ./config --output ./${env.OUTPUT_FOLDER}'
+							docker run \\
+							-v \$(pwd)/${env.OUTPUT_FOLDER}:${CONT_ROOT}/${env.OUTPUT_FOLDER} \\
+							--net=host \\
+							--name ${CONT_NAME}_exec \\
+							${ECR_URL}:latest \\
+							/bin/bash -c 'java -Dlogback.configurationFile=src/main/resources/logback.xml -jar target/fireworks-exec.jar --user $user --password $pass --folder ./config --output ./${env.OUTPUT_FOLDER}'
 						"""
 						sh "sudo chown jenkins:jenkins ${env.OUTPUT_FOLDER} -R"
 						// Create archive that will be stored on S3.
 						sh "tar -zcf fireworks-v${releaseVersion}.tgz ${env.OUTPUT_FOLDER}/"
 					}
+				}
+			}
+		}
+
+		// Execute the verifier checking the fireworks output
+		stage('Post: Verify EventPDF ran correctly') {
+			steps {
+				script {
+					def releaseVersion = utils.getReleaseVersion()
+					def dropTolerancePercentage = 5
+
+					sh """
+						docker run \\
+						-v \${pwd()}/${env.OUTPUT_FOLDER}:${CONT_ROOT}/${env.OUTPUT_FOLDER}/ \\
+						-v \$HOME/.aws:/root/.aws:ro \\
+						-e AWS_REGION=us-east-1 \\
+						--rm \\
+						--net=host \\
+						--name ${CONT_NAME}_verifier \\
+						${ECR_URL}:latest \\
+						/bin/bash -c "java -jar target/fireworks-verifier.jar --releaseNumber ${releaseVersion} --output ${outputDirectory}/ --sizeDropTolerance ${dropTolerancePercentage}"
+					"""
 				}
 			}
 		}
