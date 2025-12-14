@@ -3,18 +3,18 @@
 		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.reactome.server</groupId>
-    <artifactId>fireworks-layout</artifactId>
-    <version>3.0.7</version>
-    <packaging>jar</packaging>
+	<groupId>org.reactome.server</groupId>
+	<artifactId>fireworks-layout</artifactId>
+	<version>3.0.7</version>
+	<packaging>jar</packaging>
 
 	<name>Fireworks Layout</name>
 
-    <parent>
-        <groupId>org.reactome.maven</groupId>
-        <artifactId>reactome-parent</artifactId>
-        <version>1.0.5</version>
-    </parent>
+	<parent>
+		<groupId>org.reactome.maven</groupId>
+		<artifactId>reactome-parent</artifactId>
+		<version>1.0.5</version>
+	</parent>
 
 	<organization>
 		<name>The European Bioinformatics Institute</name>
@@ -33,9 +33,8 @@
 	</developers>
 
 	<properties>
-
 		<main.class>org.reactome.server.fireworks.Main</main.class>
-
+		<verifier.main.class>org.reactome.server.fireworks.verifier.FireworksVerifier</verifier.main.class>
 	</properties>
 
 	<dependencies>
@@ -72,6 +71,13 @@
 			<artifactId>verifier-lib</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-archiver</artifactId>
+			<version>3.6.0</version> <!-- Or the version compatible with your plugins -->
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -89,26 +95,6 @@
 			</testResource>
 		</testResources>
 		<plugins>
-
-			<!-- To be able to run this project in the command line e.g java -jar -->
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>${spring-boot.version}</version>
-				<configuration>
-					<attach>false</attach>
-					<fork>true</fork>
-					<mainClass>${main.class}</mainClass>
-					<classifier>exec</classifier>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
@@ -124,79 +110,37 @@
 				</configuration>
 			</plugin>
 
-			<!-- Generate the jar only -->
+			<!-- To be able to run this project in the command line e.g java -jar -->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>${maven.jar.version}</version>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring-boot.version}</version>
+				<configuration>
+					<fork>true</fork>
+					<mainClass>NONE</mainClass>
+				</configuration>
 				<executions>
 					<execution>
-						<id>default-jar</id>
+						<id>primary-exec</id>
 						<goals>
-							<goal>jar</goal>
+							<goal>repackage</goal>
 						</goals>
 						<configuration>
-							<excludes>
-								<exclude>**/logback.xml</exclude>
-							</excludes>
-						</configuration>
-					</execution>
-					<execution>
-						<id>exec-jar</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-						<configuration>
+							<mainClass>${main.class}</mainClass>
 							<classifier>exec</classifier>
+							<skipIfEmpty>true</skipIfEmpty>
 						</configuration>
 					</execution>
-				</executions>
-			</plugin>
-
-			<!-- Generate jar with dependencies -->
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.6</version>
-
-				<executions>
 					<execution>
-						<id>main</id>
-						<configuration>
-							<archive>
-								<manifest>
-									<Multi-Release>true</Multi-Release>
-									<Main-Class>org.reactome.server.fireworks.Main</Main-Class>
-								</manifest>
-							</archive>
-							<descriptorRefs>
-								<descriptorRef>jar-with-dependencies</descriptorRef>
-							</descriptorRefs>
-							<finalName>fireworks</finalName>
-						</configuration>
-						<phase>package</phase>
+						<id>verifier-exec</id>
 						<goals>
-							<goal>single</goal>
+							<goal>repackage</goal>
 						</goals>
-					</execution>
-
-					<execution>
-						<id>verifier</id>
 						<configuration>
-							<descriptorRefs>
-								<descriptorRef>jar-with-dependencies</descriptorRef>
-							</descriptorRefs>
-							<archive>
-								<manifestEntries>
-									<Main-Class>org.reactome.server.fireworks.verifier.Verifier</Main-Class>
-									<Multi-Release>true</Multi-Release>
-								</manifestEntries>
-							</archive>
-							<finalName>fireworks-verifier</finalName>
+							<mainClass>${verifier.main.class}</mainClass>
+							<classifier>verifier</classifier>
+							<skipIfEmpty>true</skipIfEmpty>
 						</configuration>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
 					</execution>
 				</executions>
 			</plugin>
