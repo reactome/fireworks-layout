@@ -71,15 +71,16 @@ pipeline{
 
 					sh """
 						docker run \\
-                        -v "$PWD/${env.OUTPUT_FOLDER}:${CONT_ROOT}/${env.OUTPUT_FOLDER}/" \
+						--rm \\
+                        -v "$WORKSPACE/${env.OUTPUT_FOLDER}:${CONT_ROOT}/${env.OUTPUT_FOLDER}/" \
 						-v \$HOME/.aws:/root/.aws:ro \\
 						-e AWS_REGION=us-east-1 \\
-						--rm \\
 						--net=host \\
 						--name ${CONT_NAME}_verifier \\
 						${ECR_URL}:latest \\
-						/bin/bash -c "java -jar target/fireworks-verifier.jar --releaseNumber ${releaseVersion} --output ${env.OUTPUT_FOLDER}/ --sizeDropTolerance ${dropTolerancePercentage}"
-					"""				}
+						/bin/bash -c "java -jar target/fireworks-verifier.jar --releaseNumber ${releaseVersion} --output ${CONT_ROOT}/${env.OUTPUT_FOLDER}/ --sizeDropTolerance ${dropTolerancePercentage}"
+					"""				
+				}
 			}
 		}
 
