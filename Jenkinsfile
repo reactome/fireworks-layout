@@ -63,7 +63,7 @@ pipeline{
 		}
 
 		// Execute the verifier checking the fireworks output
-		stage('Post: Verify EventPDF ran correctly') {
+		stage('Post: Verify Fireworks Layout ran correctly') {
 			steps {
 				script {
 					def releaseVersion = utils.getReleaseVersion()
